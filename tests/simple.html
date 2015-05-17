@@ -1,0 +1,60 @@
+<html>
+<style>
+.grey {
+    color:grey;
+}
+.red {
+    color:red;
+}
+.green {
+    color:green;
+}
+.big {
+    font-size:18pt;
+}
+.endl:after {
+    content:"\000A";
+    white-space: pre;
+}
+.indentedBlock {
+    padding-left:40px;
+}
+</style>
+<body>
+    <script src="../build/objectStyler.js"></script>
+    <script>
+        var styler = new ObjectStyler.Styler({punctuation: "codeSyl", blockIndent : "indentedSyl", endLine: "endLineSyl"}, [
+            {name: "codeSyl", className: "grey"},
+            {name: "greenSyl", className: "green"},
+            {name: "redSyl", className: "red"},
+            {name: "endLineSyl", className: "endl"},
+            {name: "bigSyl", className: "big"},
+            {name: "indentedSyl", className: "indentedBlock"},
+            {name: "fancy", className: "big red"},
+        ]);
+
+        var obj = {
+            key1 : "value",
+            key2 : 234,
+            obj1 : {
+                obj1Key1 : "AAA",
+                obj1Key2 : "!!link,, LINK_URL,, Link Title"
+            },
+            numberArray : [23,"dfdf",3434],
+            objectArray : [34, {key1:"v1"}, {key2:34}, 22]
+        }
+
+        var style = {
+            key2 : {k:'redSyl',v:'bigSyl'},
+            key1 : {v:'fancy'},
+            obj1 : {k:'greenSyl', v: {
+                obj1Key1 : {k:'redSyl', v:'fancy'}
+            }},
+            numberArray : {k:['bigSyl', 'greenSyl'], v: ['bigSyl', 'codeSyl']}
+        }
+
+        document.body.innerHTML = styler.style(obj,style);
+
+    </script>
+</body>
+</html>
