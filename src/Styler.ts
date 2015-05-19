@@ -50,11 +50,10 @@ module ObjectStyler {
         private styleValue(value : string|boolean|number, activatedSyls: string[]) {
             var html = "";
             if(typeof value === "string") {
-                html += this.styleSpan("\"", [this.punctuationStyleName] );
+                var quote = this.styleSpan("\"", [this.punctuationStyleName] );
 
-                html += this.styleSpan(parseStringValue(value),activatedSyls);
+                html += this.styleSpan(quote + parseStringValue(value) + quote,activatedSyls);
 
-                html += this.styleSpan("\"", [this.punctuationStyleName]);
             } else {
                 html += this.styleSpan(value.toString(),activatedSyls);
             }
