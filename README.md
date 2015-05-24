@@ -7,6 +7,7 @@ Example
 ------------
 
 ```js
+
 var styler = new ObjectStyler.Styler({punctuation: "codeSyl", blockIndent : "indentedSyl", endLine: "endLineSyl"}, [
     {name: "codeSyl", className: "grey"},
     {name: "greenSyl", className: "green"},
@@ -34,7 +35,8 @@ var style = {
     obj1 : {k:'greenSyl', v: {
         obj1Key1 : {k:'redSyl', v:'fancy'}
     }},
-    numberArray : {k:['bigSyl', 'greenSyl'], v: ['bigSyl', 'codeSyl']}
+    numberArray : {k:['bigSyl', 'greenSyl'], v:['bigSyl', 'codeSyl']},
+    objectArray : {v:{key1:{k:'greenSyl',v:'redSyl'}}}
 }
 
 document.body.innerHTML = styler.style(obj,style);

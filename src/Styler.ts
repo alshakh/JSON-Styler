@@ -59,18 +59,22 @@ module ObjectStyler {
             }
             return html;
         }
-        private styleArray(array: any[], activatedStyles: string[]) : HTML {
+        private styleArray(array: any[], activaSyls: string[] | StyleDiscription) : HTML {
+            var valSyl = (activaSyls instanceof Array? activaSyls : []);
+            var objectSyl = (typeof activaSyls === 'object'? activaSyls: {});
+
+
             var htmlResult = this.styleSpan("[", [this.punctuationStyleName]);
             for(var i = 0 ; i < array.length ; i++) {
                 if(i !== 0) {
                     htmlResult += this.styleSpan(", ", [this.punctuationStyleName]);
                 }
                 if(array[i] instanceof Array) {
-                    htmlResult += this.styleArray(array[i], activatedStyles);
+                    htmlResult += this.styleArray(array[i], activaSyls);
                 } else if (typeof array[i] === "object" ) {
-                    htmlResult += this.styleObject(array[i], {});
+                    htmlResult += this.styleObject(array[i], objectSyl);
                 } else {
-                    htmlResult += this.styleValue(array[i], activatedStyles);
+                    htmlResult += this.styleValue(array[i], valSyl);
                 }
             }
             htmlResult += this.styleSpan("]", [this.punctuationStyleName]);
@@ -132,12 +136,8 @@ module ObjectStyler {
                     // value
                     if(object[key] instanceof Array) {
 
-                        var arraySyls = getValueActiveStyles(styleDisc[key],[]);
-                        if(arraySyls instanceof Array) {
-                            html += this.styleArray(object[key],arraySyls);
-                        } else {
-                            html += this.styleArray(object[key],[]);
-                        }
+                        var syls = getValueActiveStyles(styleDisc[key],[]);
+                        html += this.styleArray(object[key],syls);
 
                     } else if(typeof object[key] === "object") {
 
