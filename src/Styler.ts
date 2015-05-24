@@ -35,12 +35,15 @@ module ObjectStyler {
         endlStyleName : string;
         blockIndentStyleName:string;
 
-        constructor(essentialStyles : EssentialStyles, styles : Style[]) {
+        quoteSymbol:string;
+        constructor(essentialStyles : EssentialStyles, styles : Style[], quote : string = "'") {
             this.styles = styles;
 
             this.punctuationStyleName = essentialStyles.punctuation;
             this.endlStyleName = essentialStyles.endLine;
             this.blockIndentStyleName = essentialStyles.blockIndent;
+
+            this.quoteSymbol = quote;
         }
 
         style(object: Object, styleDisc: StyleDiscription) : HTML {
@@ -50,7 +53,7 @@ module ObjectStyler {
         private styleValue(value : string|boolean|number, activatedSyls: string[]) {
             var html = "";
             if(typeof value === "string") {
-                var quote = this.styleSpan("\"", [this.punctuationStyleName] );
+                var quote = this.styleSpan(this.quoteSymbol, [this.punctuationStyleName] );
 
                 html += this.styleSpan(quote + parseStringValue(value) + quote,activatedSyls);
 
