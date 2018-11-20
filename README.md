@@ -1,7 +1,9 @@
 Object Styler
 ===============
 
-show javascript object in html with styles and colors for every key:value pair.
+stylize JSON text, produce HTML output. It applies styles/colors based on key:value pairs. I don't really know a proper use for it; I used it to show pages in a website based on JSON values.
+
+> ### Archived !
 
 Example
 ------------
